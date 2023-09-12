@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.Objects;
 
 public class HttpServer {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(36000);
@@ -43,11 +43,11 @@ public class HttpServer {
                 if (!in.ready()) {
                     break;
                 }
-                System.out.println(request);
+                //System.out.println(request);
                 if (Objects.equals(request, "/")) {
                     outputLine = index();
                 } else {
-                    //outputLine = getQuery(request);
+                    //outputLine = getClass(request);
                 }
             }
             outputLine = index();
@@ -57,6 +57,10 @@ public class HttpServer {
         }
         clientSocket.close();
         serverSocket.close();
+    }
+    public static String getClass(String clase) throws ClassNotFoundException {
+        Class<?> Class = java.lang.Class.forName(clase);
+        return clase;
     }
 
 
@@ -79,7 +83,7 @@ public class HttpServer {
                 "        <h1>Form with GET</h1>\n" +
                 "        <form action=\"/hello\">\n" +
                 "            <label for=\"name\">Name:</label><br>\n" +
-                "            <input type=\"text\" id=\"name\" name=\"name\" value=\"John\"><br><br>\n" +
+                "            <input type=\"text\" id=\"name\" name=\"name\" value=\"Class(java.lang.String)\"><br><br>\n" +
                 "            <input type=\"button\" value=\"Submit\" onclick=\"loadGetMsg()\">\n" +
                 "        </form> \n" +
                 "        <div id=\"getrespmsg\"></div>\n" +
